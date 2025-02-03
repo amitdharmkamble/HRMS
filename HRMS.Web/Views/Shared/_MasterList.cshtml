@@ -1,0 +1,57 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    string entityName = ViewData["EntityName"]?.ToString() ?? "Item";
+    bool showDeleted = ViewBag.ShowDeleted ?? false;
+}
+
+<h2>@entityName Management</h2>
+
+<!-- Show Deleted Toggle Button -->
+<a asp-action="Index" asp-route-showDeleted="@(showDeleted ? "false" : "true")"
+   class="btn @(showDeleted ? "btn-outline-danger" : "btn-outline-secondary")">
+    <i class="bi @(showDeleted ? "bi-eye-slash" : "bi-eye")"></i>
+    @(showDeleted ? "Hide Deleted" : "Show Deleted")
+</a>
+
+<a asp-action="Create" class="btn btn-primary">Create New @entityName</a>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.IsDeleted ? "table-danger" : "")">
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@(item.IsDeleted ? "Deleted" : "Active")</td>
+                <td>
+                    @if (item.IsDeleted)
+                    {
+                        <!-- Restore Button -->
+                        <form asp-action="Restore" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-success">Restore</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <!-- Edit & Delete Buttons -->
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                        <form asp-action="Delete" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

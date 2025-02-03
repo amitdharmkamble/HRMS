@@ -1,0 +1,26 @@
+﻿@using HRMS.Web.Models.ViewModels
+@model BaseMasterViewModel
+
+@{
+    string entityName = ViewData["EntityName"]?.ToString() ?? "Item";
+    bool isEdit = Model.Id != Guid.Empty;
+}
+
+<h2>@(isEdit ? "Edit" : "Create") @entityName</h2>
+
+<form asp-action="Save" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">@(isEdit ? "Update" : "Save")</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
