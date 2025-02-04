@@ -9,6 +9,7 @@ namespace HRMS.Infrastructure.Persistence
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Designation> Desingations { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
