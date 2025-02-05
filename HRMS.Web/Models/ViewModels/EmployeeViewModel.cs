@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HRMS.Core.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace HRMS.Web.Models.ViewModels
 {
@@ -42,21 +43,45 @@ namespace HRMS.Web.Models.ViewModels
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
+
+        public string PersonalPhone { get; set; } = string.Empty;
+        public string PersonalEmail { get; set; } = string.Empty;
+
+        public string WorkPhone { get; set; } = string.Empty;
+        public string WorkEmail { get; set; } = string.Empty;
+
+        public string Skype { get; set; } = string.Empty;
+        public string LinkedIn { get; set; } = string.Empty;
+        public string Facebook { get; set; } = string.Empty;
+        public string Twitter { get; set; } = string.Empty;
+        public string Instagram { get; set; } = string.Empty;
+        public string OtherSocialMedia { get; set; } = string.Empty;
     }
 
     public class EmployeeSalaryViewModel
     {
+        public virtual Employee Employee { get; set; }
+
         public decimal BasicSalary { get; set; }
-        public decimal Allowances { get; set; }
-        public decimal Deductions { get; set; }
-        public decimal NetSalary => BasicSalary + Allowances - Deductions;
+        public decimal HRA { get; set; }
+        public decimal OtherAllowances { get; set; }
     }
 
     public class EmployeeDocumentViewModel
     {
-        public Guid DocumentId { get; set; }
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
+
+        [Required]
         public string DocumentName { get; set; } = string.Empty;
+
+        [Required]
+        public string DocumentPath { get; set; } = string.Empty;
+
+        [Required]
         public string DocumentType { get; set; } = string.Empty;
+
+        public string DocumentNumber { get; set; } = string.Empty;
     }
 
     public class EmployeeContactPersonViewModel

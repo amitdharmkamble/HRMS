@@ -1,0 +1,43 @@
+﻿@page "/designations"
+@using HRMS.Client.Components.Pages.Department
+@inject DesignationService DesignationService
+
+<h3>Department List</h3>
+
+@if (designations == null || !designations.Any())
+{
+    <p>No designations found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var designation in designations)
+            {
+                <tr>
+                    <td>@designation.Name</td>
+                    <td>@designation.Description</td>
+                    <td>@designation.CreatedAt</td>
+                    <td>@designation.UpdatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<DesignationModel> designations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        designations = await DesignationService.GetDesignationsAsync();
+    }
+}

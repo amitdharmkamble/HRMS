@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Core", "HRMS.Core\HRMS.Core.csproj", "{A997FEF3-3020-4AA1-A25F-700DD7B38D2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMS.Core", "HRMS.Core\HRMS.Core.csproj", "{A997FEF3-3020-4AA1-A25F-700DD7B38D2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Application", "HRMS.Application\HRMS.Application.csproj", "{63300F69-17C5-41D9-A01F-CAC3C5390D9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMS.Application", "HRMS.Application\HRMS.Application.csproj", "{63300F69-17C5-41D9-A01F-CAC3C5390D9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Infrastructure", "HRMS.Infrastructure\HRMS.Infrastructure.csproj", "{1BC87D53-3476-455D-AE3D-7050B9EB910A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMS.Infrastructure", "HRMS.Infrastructure\HRMS.Infrastructure.csproj", "{1BC87D53-3476-455D-AE3D-7050B9EB910A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Web", "HRMS.Web\HRMS.Web.csproj", "{C7ACBED6-CDC7-4FA9-B709-7F8221CDEF5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMS.Web", "HRMS.Web\HRMS.Web.csproj", "{C7ACBED6-CDC7-4FA9-B709-7F8221CDEF5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Tests", "HRMS.Tests\HRMS.Tests.csproj", "{47C179B6-EAC9-4232-8AD4-8DEADE2B2854}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMS.Tests", "HRMS.Tests\HRMS.Tests.csproj", "{47C179B6-EAC9-4232-8AD4-8DEADE2B2854}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Api", "HRMS.Api\HRMS.Api.csproj", "{8DD750DE-A16D-4E6B-BD62-671BC5445D9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Client", "HRMS.Client\HRMS.Client.csproj", "{6A2D71C0-FD98-4A93-93A7-6250408F6546}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{47C179B6-EAC9-4232-8AD4-8DEADE2B2854}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47C179B6-EAC9-4232-8AD4-8DEADE2B2854}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47C179B6-EAC9-4232-8AD4-8DEADE2B2854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD750DE-A16D-4E6B-BD62-671BC5445D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD750DE-A16D-4E6B-BD62-671BC5445D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD750DE-A16D-4E6B-BD62-671BC5445D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD750DE-A16D-4E6B-BD62-671BC5445D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A2D71C0-FD98-4A93-93A7-6250408F6546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A2D71C0-FD98-4A93-93A7-6250408F6546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A2D71C0-FD98-4A93-93A7-6250408F6546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A2D71C0-FD98-4A93-93A7-6250408F6546}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

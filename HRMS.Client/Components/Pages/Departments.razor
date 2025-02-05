@@ -1,0 +1,43 @@
+﻿@page "/departments"
+@using HRMS.Client.Components.Pages.Department
+@inject DepartmentService DepartmentService
+
+<h3>Department List</h3>
+
+@if (departments == null || !departments.Any())
+{
+    <p>No departments found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var department in departments)
+            {
+                <tr>
+                    <td>@department.Name</td>
+                    <td>@department.Description</td>
+                    <td>@department.CreatedAt</td>
+                    <td>@department.UpdatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<DepartmentModel> departments;
+
+    protected override async Task OnInitializedAsync()
+    {
+        departments = await DepartmentService.GetDepartmentsAsync();
+    }
+}

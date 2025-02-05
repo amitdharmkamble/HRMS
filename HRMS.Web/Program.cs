@@ -1,4 +1,4 @@
-using HRMS.Application.Interfaces;
+﻿using HRMS.Application.Interfaces;
 using HRMS.Application.Interfaces.Repositories;
 using HRMS.Application.Mappings;
 using HRMS.Application.Services;
@@ -10,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 
 builder.Services.AddDbContext<HRMSDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -45,8 +48,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllers();
+app.MapBlazorHub();
+app.MapFallbackToController("Index", "Home");
 
 app.Run();
