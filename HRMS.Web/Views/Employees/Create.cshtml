@@ -1,129 +1,136 @@
-﻿@model HRMS.Web.Models.ViewModels.EmployeeViewModel
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add any additional styles here */
+        .tab-content {
+            margin-top: 20px;
+        }
 
-@{
-    ViewBag.Title = "Create Employee";
-}
+        .tab-pane {
+            display: none;
+        }
 
-<h2>Create Employee</h2>
+            .tab-pane.active {
+                display: block;
+            }
 
-<!-- Wizard Navigation -->
-<ul class="nav nav-tabs" id="employeeWizard">
-    <li class="nav-item">
-        <a class="nav-link active" href="#step1" data-toggle="tab">Personal Details</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#step4" data-toggle="tab">Contact</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#step3" data-toggle="tab">Salary</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#step2" data-toggle="tab">Documents</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#step5" data-toggle="tab">Contact Persons</a>
-    </li>
-</ul>
+        .nav-tabs .nav-item {
+            margin-right: 10px;
+        }
 
-<form asp-action="Create" method="post">
-    <div class="tab-content mt-3">
-        <!-- Step 1: Personal Details -->
-        <div class="tab-pane fade show active" id="step1">
-            <div class="form-group">
-                <label asp-for="EmpCode" class="control-label"></label>
-                <input asp-for="EmpCode" class="form-control" />
-                <span asp-validation-for="EmpCode" class="text-danger"></span>
-            </div>
-            <div class="container mt-4">
-                <div class="card shadow-lg">
-                    <div class="card-body">
-                        <form>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label asp-for="FirstName" class="control-label"></label>
-                                        <input asp-for="FirstName" class="form-control" />
-                                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label asp-for="MiddleName" class="control-label"></label>
-                                        <input asp-for="MiddleName" class="form-control" />
-                                        <span asp-validation-for="MiddleName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label asp-for="LastName" class="control-label"></label>
-                                        <input asp-for="LastName" class="form-control" />
-                                        <span asp-validation-for="LastName" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+        .btn-secondary, .btn-primary, .btn-success {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2>Create Employee</h2>
+
+        <!-- Wizard Navigation -->
+        <ul class="nav nav-tabs" id="employeeWizard">
+            <li class="nav-item">
+                <a class="nav-link active" href="#step1">Personal Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#step4">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#step3">Salary</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#step2">Documents</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#step5">Contact Persons</a>
+            </li>
+        </ul>
+
+        <form id="employeeForm">
+            <div class="tab-content mt-3">
+                <!-- Step 1: Personal Details -->
+                <div class="tab-pane active" id="step1">
+                    <div class="form-group">
+                        <label for="empCode">Employee Code</label>
+                        <input type="text" class="form-control" id="empCode" />
                     </div>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="middleName">Middle Name</label>
+                        <input type="text" class="form-control" id="middleName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" />
+                    </div>
+                    <button type="button" class="btn btn-primary next">Next</button>
+                </div>
+
+                <!-- Step 2: Documents -->
+                <div class="tab-pane" id="step2">
+                    <div class="form-group">
+                        <label for="documents">Upload Documents</label>
+                        <input type="file" class="form-control" id="documents" multiple />
+                    </div>
+                    <button type="button" class="btn btn-secondary prev">Previous</button>
+                    <button type="button" class="btn btn-primary next">Next</button>
+                </div>
+
+                <!-- Step 3: Salary -->
+                <div class="tab-pane" id="step3">
+                    <div class="form-group">
+                        <label for="basicSalary">Basic Salary</label>
+                        <input type="number" class="form-control" id="basicSalary" />
+                    </div>
+                    <button type="button" class="btn btn-secondary prev">Previous</button>
+                    <button type="button" class="btn btn-primary next">Next</button>
+                </div>
+
+                <!-- Step 4: Contact -->
+                <div class="tab-pane" id="step4">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" />
+                    </div>
+                    <button type="button" class="btn btn-secondary prev">Previous</button>
+                    <button type="button" class="btn btn-primary next">Next</button>
+                </div>
+
+                <!-- Step 5: Contact Persons -->
+                <div class="tab-pane" id="step5">
+                    <div class="form-group">
+                        <label for="emergencyContactName">Emergency Contact Name</label>
+                        <input type="text" class="form-control" id="emergencyContactName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="emergencyContactPhone">Emergency Contact Phone</label>
+                        <input type="tel" class="form-control" id="emergencyContactPhone" />
+                    </div>
+                    <button type="button" class="btn btn-secondary prev">Previous</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary next">Next</button>
-        </div>
-
-        <!-- Step 2: Documents -->
-        <div class="tab-pane fade" id="step2">
-            <div class="form-group">
-                <label asp-for="Documents" class="control-label">Upload Documents</label>
-                <input type="file" class="form-control" multiple />
-            </div>
-            <button type="button" class="btn btn-secondary prev">Previous</button>
-            <button type="button" class="btn btn-primary next">Next</button>
-        </div>
-
-        <!-- Step 3: Salary -->
-        <div class="tab-pane fade" id="step3">
-            <div class="form-group">
-                <label asp-for="Salary.BasicSalary" class="control-label">Basic Salary</label>
-                <input asp-for="Salary.BasicSalary" class="form-control" />
-                <span asp-validation-for="Salary.BasicSalary" class="text-danger"></span>
-            </div>
-            <button type="button" class="btn btn-secondary prev">Previous</button>
-            <button type="button" class="btn btn-primary next">Next</button>
-        </div>
-
-        <!-- Step 4: Contact -->
-        <div class="tab-pane fade" id="step4">
-            <div class="form-group">
-                <label asp-for="Contact.Address" class="control-label">Phone Number</label>
-                <input asp-for="Contact.Address" class="form-control" />
-                <span asp-validation-for="Contact.Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Contact.Email" class="control-label">Email</label>
-                <input asp-for="Contact.Email" class="form-control" />
-                <span asp-validation-for="Contact.Email" class="text-danger"></span>
-            </div>
-            <button type="button" class="btn btn-secondary prev">Previous</button>
-            <button type="button" class="btn btn-primary next">Next</button>
-        </div>
-
-        <!-- Step 5: Contact Persons -->
-        <div class="tab-pane fade" id="step5">
-            <div class="form-group">
-                <label asp-for="ContactPersons[0].Name" class="control-label">Emergency Contact Name</label>
-                <input asp-for="ContactPersons[0].Name" class="form-control" />
-                <span asp-validation-for="ContactPersons[0].Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContactPersons[0].Phone" class="control-label">Emergency Contact Phone</label>
-                <input asp-for="ContactPersons[0].Phone" class="form-control" />
-                <span asp-validation-for="ContactPersons[0].Phone" class="text-danger"></span>
-            </div>
-            <button type="button" class="btn btn-secondary prev">Previous</button>
-            <button type="submit" class="btn btn-success">Submit</button>
-        </div>
+        </form>
     </div>
-</form>
 
-@section Scripts {
+    <!-- JS Libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
     <script>
         $(document).ready(function () {
             $(".next").click(function () {
@@ -132,6 +139,8 @@
                 if (nextTab.length > 0) {
                     currentTab.removeClass("active");
                     nextTab.addClass("active").tab("show");
+                    $(".tab-pane").removeClass("active");
+                    $(nextTab.attr("href")).addClass("active");
                 }
             });
 
@@ -141,8 +150,12 @@
                 if (prevTab.length > 0) {
                     currentTab.removeClass("active");
                     prevTab.addClass("active").tab("show");
+                    $(".tab-pane").removeClass("active");
+                    $(prevTab.attr("href")).addClass("active");
                 }
             });
         });
     </script>
-}
+
+</body>
+</html>

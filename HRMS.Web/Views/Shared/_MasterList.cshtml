@@ -4,13 +4,19 @@
     bool showDeleted = ViewBag.ShowDeleted ?? false;
 }
 
+<style>
+    /* Basic Styles */
+    
+</style>
+
 <!-- Table Container -->
 <div id="table-container">
     <!-- Show Deleted Toggle Button -->
-    <button class="btn @(showDeleted ? "btn-outline-danger" : "btn-outline-secondary")"
+    <button class="btn @(showDeleted ? "btn-primary" : "btn-primary")"
             hx-get="@Url.Action("Index", new { showDeleted = !showDeleted })"
             hx-target="#table-container"
-            hx-push-url="true">
+            hx-push-url="true"
+            style="position: relative; top: 10px; left: 67vw;">
         <i class="bi @(showDeleted ? "bi-eye-slash" : "bi-eye")"></i>
         @(showDeleted ? "Hide Deleted" : "Show Deleted")
     </button>
@@ -38,8 +44,8 @@
                             <button class="btn btn-success"
                                     hx-post="@Url.Action("Restore")"
                                     hx-vals='{"id": "@item.Id"}'
-                                    hx-target="#row-@item.Id"
-                                    hx-swap="outerHTML">
+                                    hx-target="closest tr"
+                                    hx-swap="innerHTML">
                                 Restore
                             </button>
                         }
@@ -48,17 +54,18 @@
                             <!-- Edit & Delete Buttons -->
                             <button class="btn btn-warning"
                                     hx-get="@Url.Action("Edit", new { id = item.Id })"
-                                    hx-target="#modal-body"
-                                    hx-trigger="click"
-                                    hx-on="htmx:afterRequest: bootstrap.Modal.getOrCreateInstance(document.getElementById('formModal')).show()">
+                                    hx-target="body"
+                                    hx-swap="beforeend">
                                 Edit
                             </button>
 
                             <button class="btn btn-danger"
-                                    hx-post="@Url.Action("Delete")"
+                                    hx-confirm="Are you sure you want to deleted @item.Name"
+                                    hx-delete="@Url.Action("Delete")"
+                                    accesskey="none"
                                     hx-vals='{"id": "@item.Id"}'
-                                    hx-target="#row-@item.Id"
-                                    hx-swap="outerHTML">
+                            hx-target="closest tr"
+                            hx-swap="delete">
                                 Delete
                             </button>
                         }
@@ -67,25 +74,4 @@
             }
         </tbody>
     </table>
-</div>
-
-<!-- Modal -->
-<div id="formModal"
-     class="modal fade"
-     tabindex="-1"
-     aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Item</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Form content will be loaded here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>

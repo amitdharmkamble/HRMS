@@ -82,20 +82,38 @@ namespace HRMS.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        // Soft Delete
-        [HttpPost]
+        [HttpDelete]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _service.SoftDeleteAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                // Perform soft delete
+                await _service.SoftDeleteAsync(id);
+
+                // Return success message as a string
+                return Content("Record deleted successfully.");
+            }
+            catch (Exception ex)
+            {
+
+                // Return error message as a string
+                return Content("Error while deleting." + ex);
+            }
         }
 
         // Restore Deleted Record
         [HttpPost]
         public async Task<IActionResult> Restore(Guid id)
         {
-            await _service.RestoreAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _service.RestoreAsync(id);
+                return Content("Record restored successfully.");
+            }
+            catch (Exception ex)
+            {
+                return Content("Error while restoring." + ex);
+            }
         }
     }
 }

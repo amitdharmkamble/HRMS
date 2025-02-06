@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<HRMS.Core.Entities.Department>
 
+
 @{
     string entityName = "Department";
     ViewData["EntityName"] = "Department";
@@ -7,13 +8,6 @@
 
 <h2>@entityName Management</h2>
 
-<!-- Create New Record Button -->
-<button class="btn btn-primary"
-        hx-get="@Url.Action("Create")"
-        hx-target="none"
-        hx-trigger="click"
-        hx-swap="outerHTML">
-    Create New @entityName
-</button>
+    <button class="btn btn-primary" hx-get="@Url.Action("Create")" hx-target="body" hx-swap="beforeend">Create</button>
+    <partial name="_MasterList" model="Model" />
 
-<partial name="_MasterList" model="Model" />

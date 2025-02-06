@@ -4,47 +4,244 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HRMS.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/HRMS.Web.styles.css" asp-append-version="true" />
-    <script src="~/js/htmx.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.7"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <style>
+        /* Define the custom colors */
+        :root {
+            --primary-color: #D9184B;
+            --secondary-color: #BF046B;
+            --highlight-color: #F2CE1B;
+            --accent-color: #F28627;
+            --danger-color: #D93425;
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body setup with Flexbox */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+        }
+
+        /* Header styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+        }
+
+            header .container {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 1rem;
+            }
+
+            header h1 {
+                text-align: center;
+                font-size: 2.5rem;
+            }
+
+        /* Navigation Bar */
+        nav {
+            text-align: center;
+            background-color: var(--secondary-color);
+            padding: 1rem;
+        }
+
+            nav a {
+                color: white;
+                margin: 0 1rem;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                nav a:hover {
+                    color: var(--highlight-color);
+                }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+            .container h2 {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+        /* Footer styles */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+
+            footer a {
+                color: white;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    color: var(--highlight-color);
+                }
+
+        #modal {
+            /* Underlay covers entire screen. */
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            /* Flexbox centers the .modal-content vertically and horizontally */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Animate when opening */
+            animation-name: fadeIn;
+            animation-duration: 150ms;
+            animation-timing-function: ease;
+        }
+
+            #modal > .modal-underlay {
+                /* underlay takes up the entire viewport. This is only
+                    required if you want to click to dismiss the popup */
+                position: absolute;
+                z-index: -1;
+                top: 0px;
+                bottom: 0px;
+                left: 0px;
+                right: 0px;
+            }
+
+            #modal > .modal-content {
+                /* Position visible dialog near the top of the window */
+                margin-top: 10vh;
+                /* Sizing for visible dialog */
+                width: 80%;
+                max-width: 600px;
+                /* Display properties for visible dialog*/
+                border: solid 1px #999;
+                border-radius: 8px;
+                box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
+                background-color: white;
+                padding: 20px;
+                /* Animate when opening */
+                animation-name: zoomIn;
+                animation-duration: 150ms;
+                animation-timing-function: ease;
+            }
+
+            #modal.closing {
+                /* Animate when closing */
+                animation-name: fadeOut;
+                animation-duration: 150ms;
+                animation-timing-function: ease;
+            }
+
+                #modal.closing > .modal-content {
+                    /* Animate when closing */
+                    animation-name: zoomOut;
+                    animation-duration: 150ms;
+                    animation-timing-function: ease;
+                }
+
+        @@keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @@keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @@keyframes zoomIn {
+            0% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @@keyframes zoomOut {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0.9);
+            }
+        }
+
+    </style>
 </head>
 <body>
+    <!-- Header Section -->
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HRMS.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div class="container">
+            <h1>Ravima HRIS</h1>
+        </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <a href="@Url.Action("Index", "Home")">Home</a>
+            <a href="@Url.Action("Index", "Departments")">Departments</a>
+            <a href="@Url.Action("Index", "Designations")">Designations</a>
+            <a href="@Url.Action("Index", "Employees")">Employees</a>
+            <a href="@Url.Action("Privacy", "Home")">Privacy</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
             @RenderBody()
-        </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- Footer Section -->
+    <footer>
         <div class="container">
-            &copy; 2025 - HRMS.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - HRMS.Web - <a href="@Url.Action("Privacy", "Home")">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
