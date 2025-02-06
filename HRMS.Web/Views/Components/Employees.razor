@@ -1,0 +1,46 @@
+﻿@page "/employees"
+
+@using HRMS.Web.Models.ViewModels;
+@inject HttpClient Http;
+
+<h3>Employees</h3>
+
+@if (employees == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!employees.Any())
+{
+    <p>No employees found.</p>  <!-- Message when no employees are found -->
+}
+else
+{
+    <ul>
+        @foreach (var emp in employees)
+        {
+            <li>@emp.EmpCode - @emp.FirstName @emp.LastName</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<EmployeeViewModel>? employees;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            employees = await Http.GetFromJsonAsync<List<EmployeeViewModel>>("/api/employees");
+
+            if (employees == null || !employees.Any())
+            {
+                employees = new List<EmployeeViewModel>(); // Ensure it's an empty list if no employees found
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching employees: {ex.Message}");
+            employees = new List<EmployeeViewModel>(); // Return an empty list if there's an error
+        }
+    }
+}

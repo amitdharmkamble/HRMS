@@ -1,8 +1,54 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.js" integrity="sha384-oeUn82QNXPuVkGCkcrInrS1twIxKhkZiFfr2TdiuObZ3n3yIeMiqcRzkIcguaof1" crossorigin="anonymous"></script>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<main hx-ext="client-side-templates"
+	  hx-trigger="load"
+	  hx-get="https://pokeapi.co/api/v2/pokemon?limit=99&offset=0"
+	  nunjucks-template="list-template"
+	  hx-target="#list-output"
+	  hx-request='{"noHeaders": true}'
+	  hx-type="JSON">
+
+	<h1>HTMX & JSON API (Pokémon ver.)</h1>
+	<p>Fetch a JSON API endpoint using HTMX and display the results in a nunjucks template with view transition</p>
+
+	<template id="list-template">
+		<ul>
+			{% for people in results %}
+			<li>
+				<button hx-ext="client-side-templates"
+						hx-trigger="click"
+						hx-get="{{people.url}}"
+						nunjucks-template="single-template"
+						hx-target="#single-output"
+						hx-type="JSON"
+						hx-request='{"noHeaders": true}'
+						hx-swap="innerHTML transition:true">
+					{{people.name}}
+				</button>
+			</li>
+			{% endfor %}
+		</ul>
+	</template>
+
+
+	<template id="single-template">
+		<h2>{{results.name}}</h2>
+		<p><img src="{{results.sprites.other['official-artwork'].front_default}}" alt="{{results.name}}" width="400" height="500"></p>
+	</template>
+
+
+	<section class="grid">
+		<div id="list-output"></div>
+
+		<div id="single-output"
+			 hx-ext="client-side-templates"
+			 hx-trigger="load"
+			 hx-get="https://pokeapi.co/api/v2/pokemon/1/"
+			 nunjucks-template="single-template"
+			 hx-target="#single-output"
+			 hx-type="JSON"
+			 class="fade-it"></div>
+	</section>
+</main>

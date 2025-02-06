@@ -1,0 +1,28 @@
+﻿@page "/employees"
+
+@inject HttpClient Http
+
+<h3>Employee List</h3>
+
+@if (employees == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ul>
+        @foreach (var emp in employees)
+        {
+            <li>@emp.FirstName @emp.LastName</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<EmployeeViewModel>? employees;
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await Http.GetFromJsonAsync<List<EmployeeViewModel>>("/api/employees");
+    }
+}
