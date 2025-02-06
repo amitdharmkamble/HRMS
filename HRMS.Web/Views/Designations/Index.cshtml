@@ -1,7 +1,38 @@
 ﻿@model IEnumerable<HRMS.Core.Entities.Designation>
 
 @{
-    ViewData["EntityName"] = "Designation";
+    string entityName = "Department";
+    ViewData["EntityName"] = "Department";
 }
 
+<h2>@entityName Management</h2>
+
+<!-- Create New Record Button -->
+<button hx-get="@Url.Action("Create")"
+        hx-target=".modal-content"
+        hx-trigger="click"
+        data-bs-toggle="modal"
+        data-bs-target="#formModal"
+        class="btn btn-primary">
+    Create New @entityName
+</button>
+
+<div id="formModal"
+     class="modal fade"
+     tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content"></div> <!-- This is where the form will load -->
+    </div>
+</div>
+
+
 <partial name="_MasterList" model="Model" />
+
+<script>
+    function closeModal() {
+        // Use Bootstrap's modal method to hide the modal
+        var modal = new bootstrap.Modal(document.getElementById('formModal'));
+        modal.hide();
+    }
+</script>

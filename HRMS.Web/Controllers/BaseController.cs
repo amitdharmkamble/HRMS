@@ -15,17 +15,25 @@ namespace HRMS.Web.Controllers
         }
         public async Task<IActionResult> Index(bool showDeleted = false)
         {
-            var entities = await _service.GetAllAsync(showDeleted);
+            var departments = await _service.GetAllAsync(showDeleted);
             ViewBag.ShowDeleted = showDeleted;
-            return View(entities);
+
+            // Check if the request is from HTMX
+            if (Request.Headers["HX-Request"].Any())
+            {
+                return PartialView("_MasterList", departments); // Return only the table
+            }
+
+            return View("Index", departments); // Return full page for normal request
         }
+
 
         // Create - Show form
         public IActionResult Create()
         {
             var model = new BaseMasterViewModel();
             ViewData["EntityName"] = typeof(T).Name;
-            return View("_MasterForm", model);
+            return PartialView("_MasterForm", model);
         }
 
         // Edit - Show form
@@ -42,7 +50,7 @@ namespace HRMS.Web.Controllers
             };
 
             ViewData["EntityName"] = typeof(T).Name;
-            return View("_MasterForm", model);
+            return PartialView("_MasterForm", model);
         }
 
         // Edit - Update record
