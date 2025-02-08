@@ -15,17 +15,25 @@ namespace HRMS.Web.Controllers
         }
         public async Task<IActionResult> Index(bool showDeleted = false)
         {
-            var entities = await _service.GetAllAsync(showDeleted);
+            var departments = await _service.GetAllAsync(showDeleted);
             ViewBag.ShowDeleted = showDeleted;
-            return View(entities);
+
+            // Check if the request is from HTMX
+            if (Request.Headers["HX-Request"].Any())
+            {
+                return PartialView("_MasterList", departments); // Return only the table
+            }
+
+            return View("Index", departments); // Return full page for normal request
         }
+
 
         // Create - Show form
         public IActionResult Create()
         {
             var model = new BaseMasterViewModel();
             ViewData["EntityName"] = typeof(T).Name;
-            return View("_MasterForm", model);
+            return PartialView("_MasterForm", model);
         }
 
         // Edit - Show form
@@ -42,7 +50,7 @@ namespace HRMS.Web.Controllers
             };
 
             ViewData["EntityName"] = typeof(T).Name;
-            return View("_MasterForm", model);
+            return PartialView("_MasterForm", model);
         }
 
         // Edit - Update record
@@ -74,20 +82,38 @@ namespace HRMS.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        // Soft Delete
-        [HttpPost]
+        [HttpDelete]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _service.SoftDeleteAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                // Perform soft delete
+                await _service.SoftDeleteAsync(id);
+
+                // Return success message as a string
+                return Content("Record deleted successfully.");
+            }
+            catch (Exception ex)
+            {
+
+                // Return error message as a string
+                return Content("Error while deleting." + ex);
+            }
         }
 
         // Restore Deleted Record
         [HttpPost]
         public async Task<IActionResult> Restore(Guid id)
         {
-            await _service.RestoreAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _service.RestoreAsync(id);
+                return Content("Record restored successfully.");
+            }
+            catch (Exception ex)
+            {
+                return Content("Error while restoring." + ex);
+            }
         }
     }
 }

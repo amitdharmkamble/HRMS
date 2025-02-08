@@ -1,5 +1,7 @@
 ﻿using HRMS.Application.Interfaces.Repositories;
+using HRMS.Core.Entities;
 using HRMS.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.Infrastructure.Repositories
 {
@@ -12,6 +14,9 @@ namespace HRMS.Infrastructure.Repositories
             _context = context;
         }
 
-
+        public async Task<List<Employee>> GetEmployeesAsync()
+        {
+            return await _context.Employees.ToListAsync();
+        }
     }
 }

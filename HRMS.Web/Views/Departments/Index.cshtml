@@ -1,7 +1,13 @@
 ﻿@model IEnumerable<HRMS.Core.Entities.Department>
 
+
 @{
+    string entityName = "Department";
     ViewData["EntityName"] = "Department";
 }
 
-<partial name="_MasterList" model="Model" />
+<h2>@entityName Management</h2>
+
+    <button class="btn btn-primary" hx-get="@Url.Action("Create")" hx-target="body" hx-swap="beforeend">Create</button>
+    <partial name="_MasterList" model="Model" />
+

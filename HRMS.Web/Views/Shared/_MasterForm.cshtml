@@ -6,21 +6,36 @@
     bool isEdit = Model.Id != Guid.Empty;
 }
 
-<h2>@(isEdit ? "Edit" : "Create") @entityName</h2>
 
-<form asp-action="Save" method="post">
-    <input type="hidden" asp-for="Id" />
+<div id="modal" _="on closeModal add .closing then wait for animationend then remove me">
+    <div class="modal-underlay" _="on click trigger closeModal"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>@(isEdit ? "Edit" : "Create") @entityName</h2>
+        </div>
+        <form asp-action="Save" method="post">
 
-    <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input asp-for="Name" class="form-control" required />
+            <div class="modal-body">
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span class="text-danger" asp-validation-for="Description"></span>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">@(isEdit ? "Update" : "Save")</button>
+                <div id="loading-indicator" class="htmx-indicator">
+                    <span>Saving...</span>
+                </div>
+            </div>
+        </form>
+        <button class="btn btn-close" _="on click trigger closeModal">Close</button>
     </div>
-
-    <div class="mb-3">
-        <label class="form-label">Description</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary">@(isEdit ? "Update" : "Save")</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+</div>

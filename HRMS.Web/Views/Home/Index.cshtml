@@ -1,8 +1,219 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS Web</title>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <style>
+        /* Define custom colors */
+        :root {
+            --primary-color: #D9184B;
+            --secondary-color: #BF046B;
+            --highlight-color: #F2CE1B;
+            --accent-color: #F28627;
+            --danger-color: #D93425;
+            --background-color: #f4f7fa;
+            --card-bg: #ffffff;
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-section a {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .hero-section a:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Container for Content */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Features Section */
+        .features-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .features-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .features-section .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .feature-card a {
+            text-decoration: none;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 5px;
+        }
+
+        .feature-card a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta-section h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section a {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        .cta-section a:hover {
+            background-color: var(--highlight-color);
+        }
+
+        /* Responsive Styles */
+        media (max-width: 768px) {
+            .feature-card {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .features-section .row {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1>Welcome to HRIS</h1>
+            <p>Efficient Human Resource Information System</p>
+            <p>Manage employees, track performance, and optimize recruitment all in one place.</p>
+            <a href="#">Learn More</a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section container">
+        <h2>Features</h2>
+        <div class="row">
+            <!-- Feature 1: Employee Management -->
+            <div class="feature-card">
+                <h4>Employee Management</h4>
+                <p>Streamline employee data and performance tracking with ease.</p>
+                <a href="#">Learn More</a>
+            </div>
+
+            <!-- Feature 2: Recruitment & Hiring -->
+            <div class="feature-card">
+                <h4>Recruitment & Hiring</h4>
+                <p>Manage job postings, interviews, and hiring processes efficiently.</p>
+                <a href="#">Learn More</a>
+            </div>
+
+            <!-- Feature 3: HR Analytics -->
+            <div class="feature-card">
+                <h4>HR Analytics</h4>
+                <p>Analyze HR data to make informed decisions and improve operations.</p>
+                <a href="#">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="cta-section container">
+        <h3>Get Started Today!</h3>
+        <p>Take your HR management to the next level with HRMS</p>
+        <a href="#">Start Now</a>
+    </div>
+
+</body>
+</html>

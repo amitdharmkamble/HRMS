@@ -1,57 +1,77 @@
 ﻿@model IEnumerable<dynamic>
-
 @{
     string entityName = ViewData["EntityName"]?.ToString() ?? "Item";
     bool showDeleted = ViewBag.ShowDeleted ?? false;
 }
 
-<h2>@entityName Management</h2>
+<style>
+    /* Basic Styles */
+    
+</style>
 
-<!-- Show Deleted Toggle Button -->
-<a asp-action="Index" asp-route-showDeleted="@(showDeleted ? "false" : "true")"
-   class="btn @(showDeleted ? "btn-outline-danger" : "btn-outline-secondary")">
-    <i class="bi @(showDeleted ? "bi-eye-slash" : "bi-eye")"></i>
-    @(showDeleted ? "Hide Deleted" : "Show Deleted")
-</a>
+<!-- Table Container -->
+<div id="table-container">
+    <!-- Show Deleted Toggle Button -->
+    <button class="btn @(showDeleted ? "btn-primary" : "btn-primary")"
+            hx-get="@Url.Action("Index", new { showDeleted = !showDeleted })"
+            hx-target="#table-container"
+            hx-push-url="true"
+            style="position: relative; top: 10px; left: 67vw;">
+        <i class="bi @(showDeleted ? "bi-eye-slash" : "bi-eye")"></i>
+        @(showDeleted ? "Hide Deleted" : "Show Deleted")
+    </button>
 
-<a asp-action="Create" class="btn btn-primary">Create New @entityName</a>
-
-<table class="table table-bordered mt-3">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr class="@(item.IsDeleted ? "table-danger" : "")">
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td>@(item.IsDeleted ? "Deleted" : "Active")</td>
-                <td>
-                    @if (item.IsDeleted)
-                    {
-                        <!-- Restore Button -->
-                        <form asp-action="Restore" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="@item.Id" />
-                            <button type="submit" class="btn btn-success">Restore</button>
-                        </form>
-                    }
-                    else
-                    {
-                        <!-- Edit & Delete Buttons -->
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                        <form asp-action="Delete" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="@item.Id" />
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    }
-                </td>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="row-@item.Id" class="@(item.IsDeleted ? "table-danger" : "")">
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@(item.IsDeleted ? "Deleted" : "Active")</td>
+                    <td>
+                        @if (item.IsDeleted)
+                        {
+                            <!-- Restore Button -->
+                            <button class="btn btn-success"
+                                    hx-post="@Url.Action("Restore")"
+                                    hx-vals='{"id": "@item.Id"}'
+                                    hx-target="closest tr"
+                                    hx-swap="innerHTML">
+                                Restore
+                            </button>
+                        }
+                        else
+                        {
+                            <!-- Edit & Delete Buttons -->
+                            <button class="btn btn-warning"
+                                    hx-get="@Url.Action("Edit", new { id = item.Id })"
+                                    hx-target="body"
+                                    hx-swap="beforeend">
+                                Edit
+                            </button>
+
+                            <button class="btn btn-danger"
+                                    hx-confirm="Are you sure you want to deleted @item.Name"
+                                    hx-delete="@Url.Action("Delete")"
+                                    accesskey="none"
+                                    hx-vals='{"id": "@item.Id"}'
+                            hx-target="closest tr"
+                            hx-swap="delete">
+                                Delete
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

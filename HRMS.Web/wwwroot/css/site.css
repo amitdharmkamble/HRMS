@@ -1,22 +1,501 @@
-html {
-  font-size: 14px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Define the custom colors */
+:root {
+    --primary-color: #D9184B;
+    --secondary-color: #BF046B;
+    --highlight-color: #F2CE1B;
+    --accent-color: #F28627;
+    --danger-color: #D93425;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Body setup with Flexbox */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
 }
+
+/* Header styles */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+}
+
+    header .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    header h1 {
+        text-align: center;
+        font-size: 2.5rem;
+    }
+
+/* Navigation Bar */
+nav {
+    text-align: center;
+    background-color: var(--secondary-color);
+    padding: 1rem;
+}
+
+    nav a {
+        color: white;
+        margin: 0 1rem;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        nav a:hover {
+            color: var(--highlight-color);
+        }
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+    .container h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+/* Footer styles */
+footer {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+}
+
+    footer a {
+        color: white;
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            color: var(--highlight-color);
+        }
+
+#modal {
+    /* Underlay covers entire screen. */
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    /* Flexbox centers the .modal-content vertically and horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Animate when opening */
+    animation-name: fadeIn;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+}
+
+    #modal > .modal-underlay {
+        /* underlay takes up the entire viewport. This is only
+                    required if you want to click to dismiss the popup */
+        position: absolute;
+        z-index: -1;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+
+    #modal > .modal-content {
+        /* Position visible dialog near the top of the window */
+        margin-top: 10vh;
+        /* Sizing for visible dialog */
+        width: 80%;
+        max-width: 600px;
+        /* Display properties for visible dialog*/
+        border: solid 1px #999;
+        border-radius: 8px;
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
+        background-color: white;
+        padding: 20px;
+        /* Animate when opening */
+        animation-name: zoomIn;
+        animation-duration: 150ms;
+        animation-timing-function: ease;
+    }
+
+    #modal.closing {
+        /* Animate when closing */
+        animation-name: fadeOut;
+        animation-duration: 150ms;
+        animation-timing-function: ease;
+    }
+
+        #modal.closing > .modal-content {
+            /* Animate when closing */
+            animation-name: zoomOut;
+            animation-duration: 150ms;
+            animation-timing-function: ease;
+        }
+
+@@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@@keyframes zoomIn {
+    0% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@@keyframes zoomOut {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+.hero-section {
+    background-color: #2d3e50;
+    color: white;
+    padding: 100px 0;
+}
+
+    .hero-section h1 {
+        font-size: 3rem;
+    }
+
+.features-section {
+    padding: 50px 0;
+}
+
+.feature-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+    .feature-card i {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        color: #007bff;
+    }
+
+.footer {
+    background-color: #2d3e50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+:root {
+    --primary-color: #D9184B;
+    --secondary-color: #BF046B;
+    --highlight-color: #F2CE1B;
+    --accent-color: #F28627;
+    --danger-color: #D93425;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body setup with Flexbox */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+}
+
+/* Header styles */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+}
+
+    header .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    header h1 {
+        text-align: center;
+        font-size: 2.5rem;
+    }
+
+/* Navigation Bar */
+nav {
+    text-align: center;
+    background-color: var(--secondary-color);
+    padding: 1rem;
+}
+
+    nav a {
+        color: white;
+        margin: 0 1rem;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        nav a:hover {
+            color: var(--highlight-color);
+        }
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+    .container h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+/* Footer styles */
+footer {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+}
+
+    footer a {
+        color: white;
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            color: var(--highlight-color);
+        }
+
+#modal {
+    /* Underlay covers entire screen. */
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    /* Flexbox centers the .modal-content vertically and horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Animate when opening */
+    animation-name: fadeIn;
+    animation-duration: 150ms;
+    animation-timing-function: ease;
+}
+
+    #modal > .modal-underlay {
+        /* underlay takes up the entire viewport. This is only
+                    required if you want to click to dismiss the popup */
+        position: absolute;
+        z-index: -1;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+
+    #modal > .modal-content {
+        /* Position visible dialog near the top of the window */
+        margin-top: 10vh;
+        /* Sizing for visible dialog */
+        width: 80%;
+        max-width: 600px;
+        /* Display properties for visible dialog*/
+        border: solid 1px #999;
+        border-radius: 8px;
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
+        background-color: white;
+        padding: 20px;
+        /* Animate when opening */
+        animation-name: zoomIn;
+        animation-duration: 150ms;
+        animation-timing-function: ease;
+    }
+
+    #modal.closing {
+        /* Animate when closing */
+        animation-name: fadeOut;
+        animation-duration: 150ms;
+        animation-timing-function: ease;
+    }
+
+        #modal.closing > .modal-content {
+            /* Animate when closing */
+            animation-name: zoomOut;
+            animation-duration: 150ms;
+            animation-timing-function: ease;
+        }
+
+@@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@@keyframes zoomIn {
+    0% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@@keyframes zoomOut {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+/* Table Styles for Department List */
+.table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+    .table th, .table td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .table th {
+        background-color: #D9184B;
+        color: white;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table tr:hover {
+        background-color: #f2f2f2;
+    }
+
+/* Button Styles */
+.btn-primary {
+    background-color: #D9184B;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+    .btn-primary:hover {
+        background-color: #BF046B;
+    }
+
 
 body {
-  margin-bottom: 60px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
