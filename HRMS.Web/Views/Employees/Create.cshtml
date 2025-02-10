@@ -1,162 +1,63 @@
-﻿<div class="container mt-5">
-    <h2>Create Employee</h2>
+﻿@model HRMS.Web.Models.ViewModels.EmployeeViewModel
 
-    <!-- Wizard Navigation -->
-    <ul class="nav nav-tabs" id="employeeWizard">
-        <li class="nav-item">
-            <a class="nav-link active" href="#step1">Employee Header</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#step4">Employee Personal Details</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#step3">Employee Work Details</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#step2">Employee Salary Details</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#step5">Employee Document Details</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#step5">Employee Contact Details</a>
-        </li>
-    </ul>
+<a href="/employees" class="btn btn-link">
+    &larr; Back to Employee List
+</a>
 
-    <!-- Step 1: Employee Header -->
-    <form id="employeeForm">
-        <div class="tab-content mt-3">
-            <div class="tab-pane active" id="step1">
-                <div class="form-group">
-                    <label for="empCode">Employee Code</label>
-                    <input type="text" class="form-control" id="empCode" />
+<div class="container mt-5">
+    <!-- Main Employee Details Container -->
+    <div class="card shadow-lg p-4">
+        <h3 class="text-center text-primary mb-4">Create Employee</h3>
+
+        <!-- Employee Header Information -->
+        <div class="card bg-light p-3">
+            <form id="employeeForm" method="post" action="@Url.Action("Create")">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="empCode" class="form-label fw-bold">Employee Code</label>
+                        <input type="text" class="form-control" id="empCode" placeholder="Enter employee code" asp-for="EmpCode" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="firstName" class="form-label fw-bold">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name" asp-for="FirstName" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="middleName" class="form-label fw-bold">Middle Name</label>
+                        <input type="text" class="form-control" id="middleName" placeholder="Enter middle name" asp-for="MiddleName" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label fw-bold">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name" asp-for="LastName" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="department" class="form-label fw-bold">Department</label>
+                        <select class="form-select" id="department" asp-for="DepartmentId">
+                            <option value="">Select department</option>
+                            @foreach (var department in ViewBag.Departments)
+                            {
+                                <option value="@department.Id">@department.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="designation" class="form-label fw-bold">Designation</label>
+                        <select class="form-select" id="designation" asp-for="DesignationId">
+                            <option value="">Select designation</option>
+                            @foreach (var designation in ViewBag.Designations)
+                            {
+                                <option value="@designation.Id">@designation.Name</option>
+                            }
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="firstName">Employee First Name</label>
-                    <input type="text" class="form-control" id="firstName" />
+
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="/employees" class="btn btn-outline-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Save Employee</button>
                 </div>
-                <div class="form-group">
-                    <label for="middleName">Employee Middle Name</label>
-                    <input type="text" class="form-control" id="middleName" />
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Employee Last Name</label>
-                    <input type="text" class="form-control" id="lastName" />
-                </div>
-                <button type="button" class="btn btn-primary next">Next</button>
-            </div>
+            </form>
         </div>
-    </form>
 
-    <!-- Step 2: Employee Personal Details -->
-    <form>
-        <div class="tab-pan active" id="step2">
-            <div class="form-group">
-                <label for="gender">Gender(*)</label>
-                <select class="form-group" style="width:100px;background-color:white;color:black;" id="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="gender">Marital Status(*)</label>
-                <select class="form-group" style="width:100px;background-color:white;color:black;" id="gender">
-                    <option value="Unspecified">Unspeciefied</option>
-                    <option value="Male">Married</option>
-                    <option value="Female">Never Married</option>
-                    <option value="Other">Divorced</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="gender">Nationality(*)</label>
-                <select class="form-group" style="width:150px;background-color:white;color:black;" id="gender">
-                    <option value="Unspecified">Unspecified</option>
-                    <option value="Indian">Indian</option>
-                    <option value="Male">Non Resident of India</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="gender">Permanent Address</label>
-                <input type="text" placeholder="Address line 1" maxlength="100"/>
-                <input type="text" placeholder="Address line 2" maxlength="100" />
-                <input type="text" placeholder="Address line 3" maxlength="100" />
-                <select class="form-group" style="width:150px;background-color:white;color:black;" id="permanantAddressCity">
-                    <option value="Unspecified">Unspecified</option>
-                    <option value="Pune">Pune</option>
-                    <option value="Out of Pune">Out of Pune</option>
-                </select>
-                <select class="form-group" style="width:150px;background-color:white;color:black;" id="permanantAddressCity">
-                    <option value="Unspecified">Unspecified</option>
-                    <option value="Pune">Pune</option>
-                    <option value="Out of Pune">Out of Pune</option>
-                </select>
-            </div>
-            <button type="button" class="btn btn-secondary prev">Previous</button>
-            <button type="button" class="btn btn-primary next">Next</button>
-        </div>
-    </form>
-
-
-    <!-- Step 3: Employee Work Details -->
-    <form>
-        <div class="tab-pane" id="step3">
-            <div class="form-group">
-                <label for="basicSalary">Basic Salary</label>
-                <input type="number" class="form-control" id="basicSalary" />
-            </div>
-            <button type="button" class="btn btn-secondary prev">Previous</button>
-            <button type="button" class="btn btn-primary next">Next</button>
-        </div>
-    </form>
-
-
-    <!-- Step 4: Employee Salary Details -->
-    <form>
-        <div class="tab-pane" id="step4">
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" class="form-control" id="phone" />
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" />
-            </div>
-            <button type="button" class="btn btn-secondary prev">Previous</button>
-            <button type="button" class="btn btn-primary next">Next</button>
-        </div>
-    </form>
-
-
-    <!-- Step 5: Employee Document Details -->
-    <form>
-        <div class="tab-pane" id="step5">
-            <div class="form-group">
-                <label for="emergencyContactName">Emergency Contact Name</label>
-                <input type="text" class="form-control" id="emergencyContactName" />
-            </div>
-            <div class="form-group">
-                <label for="emergencyContactPhone">Emergency Contact Phone</label>
-                <input type="tel" class="form-control" id="emergencyContactPhone" />
-            </div>
-            <button type="button" class="btn btn-secondary prev">Previous</button>
-            <button type="submit" class="btn btn-success">Submit</button>
-        </div>
-    </form>
-
-    <!-- Step 5: Employee Contact Details -->
-    <form>
-        <div class="tab-pane" id="step5">
-            <div class="form-group">
-                <label for="emergencyContactName">Emergency Contact Name</label>
-                <input type="text" class="form-control" id="emergencyContactName" />
-            </div>
-            <div class="form-group">
-                <label for="emergencyContactPhone">Emergency Contact Phone</label>
-                <input type="tel" class="form-control" id="emergencyContactPhone" />
-            </div>
-            <button type="button" class="btn btn-secondary prev">Previous</button>
-            <button type="submit" class="btn btn-success">Submit</button>
-        </div>
-    </form>
+    </div>
 </div>

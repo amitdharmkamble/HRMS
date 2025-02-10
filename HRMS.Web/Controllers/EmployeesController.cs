@@ -1,4 +1,7 @@
-﻿using HRMS.Application.Interfaces;
+﻿using HRMS.Application.DTOs.Employee;
+using HRMS.Application.Interfaces;
+using HRMS.Core.Entities;
+using HRMS.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Web.Controllers
@@ -29,6 +32,26 @@ namespace HRMS.Web.Controllers
             ViewBag.Departments = departments;
             ViewBag.Designations = designations;
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(EmployeeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                EmployeeServiceModel serviceModel = new EmployeeServiceModel
+                {
+                    FirstName = model.FirstName,
+                    MiddleName = model.MiddleName,
+                    LastName = model.LastName,
+                    EmpCode = model.EmpCode,
+                    DepartmentId = model.DepartmentId,
+                    DesignationId = model.DesignationId,
+                };
+                var employee = await _employeeService.AddEmployeeAsync(serviceModel);
+                return PartialView("Create", model);
+            }
+            return View(model);
         }
     }
 }

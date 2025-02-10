@@ -60,5 +60,16 @@ namespace HRMS.Infrastructure.Repositories
             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> ExistsAsync(Guid id)
+        {
+            return await _dbSet.AnyAsync(e => e.Id == id);
+        }
+
+        public async Task<string> GetNameByIdAsync(Guid id)
+        {
+            var entity = await _dbSet.FindAsync(id);
+            return entity?.Name ?? string.Empty;
+        }
     }
 }

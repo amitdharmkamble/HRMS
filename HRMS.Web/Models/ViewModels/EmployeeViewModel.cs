@@ -21,21 +21,21 @@ namespace HRMS.Web.Models.ViewModels
         [Required]
         [StringLength(50)]
         public string LastName { get; set; } = string.Empty;
-        [Required]
         public string Gender { get; set; } = string.Empty;
 
-        [Required]
         public string MaritalStatus { get; set; } = string.Empty;
 
-        [Required]
         public Guid DepartmentId { get; set; }
         public string DepartmentName { get; set; } = string.Empty;
 
-        public EmployeeContactViewModel Contact { get; set; } = new EmployeeContactViewModel();
-        public EmployeeSalaryViewModel Salary { get; set; } = new EmployeeSalaryViewModel();
+        public Guid DesignationId { get; set; }
+        public string DesignationName { get; set; } = string.Empty;
 
-        public List<EmployeeDocumentViewModel> Documents { get; set; } = new List<EmployeeDocumentViewModel>();
-        public List<EmployeeContactPersonViewModel> ContactPersons { get; set; } = new List<EmployeeContactPersonViewModel>();
+        public EmployeeContactViewModel? Contact { get; set; }
+        public EmployeeSalaryViewModel? Salary { get; set; }
+
+        public List<EmployeeDocumentViewModel>? Documents { get; set; }
+        public List<EmployeeContactPersonViewModel>? ContactPersons { get; set; }
     }
 
     public class EmployeeContactViewModel
@@ -60,8 +60,6 @@ namespace HRMS.Web.Models.ViewModels
 
     public class EmployeeSalaryViewModel
     {
-        public virtual Employee Employee { get; set; }
-
         public decimal BasicSalary { get; set; }
         public decimal HRA { get; set; }
         public decimal OtherAllowances { get; set; }

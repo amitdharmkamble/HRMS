@@ -10,5 +10,6 @@ namespace HRMS.Application.Interfaces.Repositories
         Task UpdateAsync(T entity);
         Task SoftDeleteAsync(Guid id);
         Task RestoreAsync(Guid id);
+        Task<string> GetNameByIdAsync(Guid id);
     }
 }

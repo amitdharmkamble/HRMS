@@ -4,6 +4,7 @@ using HRMS.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Infrastructure.Migrations
 {
     [DbContext(typeof(HRMSDbContext))]
-    partial class HRMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250209160330_addEmployeeContactPersonTable")]
+    partial class addEmployeeContactPersonTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +84,7 @@ namespace HRMS.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Designations");
+                    b.ToTable("Desingations");
                 });
 
             modelBuilder.Entity("HRMS.Core.Entities.Employee", b =>
@@ -145,6 +148,10 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("DesignationId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -314,6 +321,25 @@ namespace HRMS.Infrastructure.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("EmployeeSalaries");
+                });
+
+            modelBuilder.Entity("HRMS.Core.Entities.Employee", b =>
+                {
+                    b.HasOne("HRMS.Core.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HRMS.Core.Entities.Designation", "Designation")
+                        .WithMany()
+                        .HasForeignKey("DesignationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Designation");
                 });
 
             modelBuilder.Entity("HRMS.Core.Entities.EmployeeContact", b =>

@@ -8,8 +8,12 @@ namespace HRMS.Infrastructure.Persistence
         public HRMSDbContext(DbContextOptions<HRMSDbContext> options) : base(options) { }
 
         public DbSet<Department> Departments { get; set; }
-        public DbSet<Designation> Desingations { get; set; }
+        public DbSet<Designation> Designations { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeContact> EmployeeContacts { get; set; }
+        public DbSet<EmployeeContactPerson> EmployeeContactPersons { get; set; }
+        public DbSet<EmployeeDocument> EmployeeDocuments { get; set; }
+        public DbSet<EmployeeSalary> EmployeeSalaries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -479,20 +479,6 @@ footer {
         background-color: #BF046B;
     }
 
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7fa;
-    margin: 0;
-    padding: 0;
-}
-
-h2 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-}
-
 .container {
     width: 100%;
     max-width: 1200px;
