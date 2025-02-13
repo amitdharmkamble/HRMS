@@ -7,5 +7,6 @@ namespace HRMS.Application.Interfaces
         public Task<List<EmployeeServiceModel>> GetEmployeesAsync();
 
         public Task<EmployeeServiceModel> AddEmployeeAsync(EmployeeServiceModel model);
+        public Task<bool> UpdateEmployeePersonalDetailsAsync(EmployeeServiceModel model);
     }
 }

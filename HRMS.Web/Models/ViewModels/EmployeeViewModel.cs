@@ -24,6 +24,8 @@ namespace HRMS.Web.Models.ViewModels
         public string Gender { get; set; } = string.Empty;
 
         public string MaritalStatus { get; set; } = string.Empty;
+        public DateTime DateOfBirth { get; set; }
+        public DateTime DateOfJoining { get; set; }
 
         public Guid DepartmentId { get; set; }
         public string DepartmentName { get; set; } = string.Empty;

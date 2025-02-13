@@ -3,74 +3,32 @@
 *@
 @{
 }
-<!-- Wizard Navigation -->
-<ul class="nav nav-tabs" id="employeeWizard">
-    <li class="nav-item">
-        <a class="nav-link" href="#step4">Employee Personal Details</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#step3">Employee Work Details</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#step2">Employee Salary Details</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#step5">Employee Document Details</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#step5">Employee Contact Details</a>
-    </li>
-</ul>
-
-<!-- Section Navigation Tabs -->
 <ul class="nav nav-tabs mt-4" id="employeeTabs">
     <li class="nav-item">
-        <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails">Personal Details</a>
+        <a class="nav-link active" data-bs-toggle="tab" href="#personalDetails">Employee Personal Details</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#contactInfo">Contact Information</a>
+        <a class="nav-link" data-bs-toggle="tab" href="#workInfo">Employee Work Details</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#jobDetails">Job Details</a>
+        <a class="nav-link" data-bs-toggle="tab" href="#jobDetails">Employee Document Details</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#jobDetails">Employee Salary Details</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#jobDetails">Employee Contact Details</a>
     </li>
 </ul>
 
 <!-- Tab Content Sections -->
 <div class="tab-content p-3 border rounded">
     <div class="tab-pane fade show active" id="personalDetails">
-        <h5 class="text-secondary">Personal Details</h5>
-        <form>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label class="form-label">Date of Birth</label>
-                    <input type="date" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Gender</label>
-                    <select class="form-select">
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-            </div>
-        </form>
+        <partial name="_EmployeePersonalDetails" ></partial>
     </div>
 
-    <div class="tab-pane fade" id="contactInfo">
-        <h5 class="text-secondary">Contact Information</h5>
-        <form>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control">
-                </div>
-            </div>
-        </form>
+    <div class="tab-pane fade" id="workInfo">
+        <partial name="_EmployeeWorkDetails" ></partial>
     </div>
 
     <div class="tab-pane fade" id="jobDetails">

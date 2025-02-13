@@ -1,23 +1,17 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-<!-- Step 2: Employee Personal Details -->
+﻿@model HRMS.Web.Models.ViewModels.EmployeeViewModel
 <form>
     <div class="tab-pan active" id="step2">
         <div class="form-group">
-            <label for="gender">Gender(*)</label>
-            <select class="form-group" style="width:100px;background-color:white;color:black;" id="gender">
+            <label for="gender" asp-for="Gender">Gender(*)</label>
+            <select class="form-group" style="width:100px;background-color:white;color:black;" id="gender" asp-for="Gender">
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
         </div>
         <div class="form-group">
-            <label for="gender">Marital Status(*)</label>
-            <select class="form-group" style="width:100px;background-color:white;color:black;" id="gender">
+            <label for="gender" asp-for="MaritalStatus">Marital Status(*)</label>
+            <select class="form-group" style="width:100px;background-color:white;color:black;" id="gender" asp-for="MaritalStatus">
                 <option value="Unspecified">Unspeciefied</option>
                 <option value="Male">Married</option>
                 <option value="Female">Never Married</option>
@@ -48,7 +42,6 @@
                 <option value="Out of Pune">Out of Pune</option>
             </select>
         </div>
-        <button type="button" class="btn btn-secondary prev">Previous</button>
-        <button type="button" class="btn btn-primary next">Next</button>
+        <button type="button" class="btn btn-primary next">Save</button>
     </div>
 </form>

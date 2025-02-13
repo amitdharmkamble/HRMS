@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using HRMS.Application.DTOs.Employee;
 using HRMS.Application.Interfaces;
 using HRMS.Application.Interfaces.Repositories;
@@ -41,6 +42,8 @@ namespace HRMS.Application.Services
 
         public async Task<List<EmployeeServiceModel>> GetEmployeesAsync()
         {
+            //Use Include() to load related entities
+            //Eager loading is the process whereby a query for one type of entity also loads related entities as part of the query.
             var employees = await _employeeRepo.GetEmployeesAsync();
 
             if (employees == null || !employees.Any())
@@ -57,6 +60,17 @@ namespace HRMS.Application.Services
             return employeeServiceModels;
         }
 
-
+        public Task<bool> UpdateEmployeePersonalDetailsAsync(EmployeeServiceModel model)
+        {
+            try
+            {
+                var employee = _mapper.Map<Employee>(model);
+                return _employeeRepo.UpdateEmployeePersonalDetails(employee);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

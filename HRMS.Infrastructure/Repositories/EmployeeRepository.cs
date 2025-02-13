@@ -103,5 +103,38 @@ namespace HRMS.Infrastructure.Repositories
             }
         }
 
+        public async Task<bool> UpdateEmployeePersonalDetails(Employee employee)
+        {
+            if (employee == null)
+                throw new ArgumentNullException(nameof(employee));
+
+            await using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                var existingEmployee = await _context.Employees.FindAsync(employee.Id);
+                if (existingEmployee == null)
+                    return false;
+
+                existingEmployee.FirstName = employee.FirstName;
+                existingEmployee.MiddleName = employee.MiddleName;
+                existingEmployee.LastName = employee.LastName;
+                existingEmployee.DepartmentId = employee.DepartmentId;
+                existingEmployee.DesignationId = employee.DesignationId;
+                existingEmployee.DateOfBirth = employee.DateOfBirth;
+                existingEmployee.DateOfJoining = employee.DateOfJoining;
+
+                _context.Employees.Update(existingEmployee);
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
+
     }
 }

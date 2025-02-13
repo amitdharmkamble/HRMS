@@ -7,6 +7,7 @@
 
 <!-- Button to Create Employee -->
 <a href="@Url.Action("Create", "Employees")" class="btn btn-primary mb-3">Add Employee</a>
+<button hx-post="@Url.Action("TestToastMessage")" hx-swap="afterend" class="btn btn-primary mb-3">Test Toast Message</button>
 
 <table class="table table-bordered">
     <thead>

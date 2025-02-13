@@ -27,5 +27,6 @@ namespace HRMS.Application.DTOs.Employee
         public string Gender { get; set; } = string.Empty;
         [Required]
         public string MaritalStatus { get; set; } = string.Empty;
+        public DateTime DateOfJoining { get; set; }
     }
 }

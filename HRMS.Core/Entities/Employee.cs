@@ -31,6 +31,7 @@ namespace HRMS.Core.Entities
         public virtual ICollection<EmployeeDocument> Documents { get; set; } = new List<EmployeeDocument>();
 
         public virtual ICollection<EmployeeContactPerson> ContactPersons { get; set; } = new List<EmployeeContactPerson>();
+        public DateTime DateOfJoining { get; set; }
     }
 
 }
