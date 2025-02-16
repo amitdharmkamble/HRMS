@@ -7,7 +7,6 @@
 
 <!-- Button to Create Employee -->
 <a href="@Url.Action("Create", "Employees")" class="btn btn-primary mb-3">Add Employee</a>
-<button hx-post="@Url.Action("TestToastMessage")" hx-swap="afterend" class="btn btn-primary mb-3">Test Toast Message</button>
 
 <table class="table table-bordered">
     <thead>
@@ -38,7 +37,7 @@
                 <td>@employee.Gender</td>
                 <td>@employee.DateOfBirth.ToString("yyyy-MM-dd")</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Employees", new { id = employee.Id })" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="@Url.Action("EditEmployeePersonalDetails", "Employees", new { id = employee.Id })" class="btn btn-sm btn-warning">Edit</a>
                     <a href="@Url.Action("Delete", "Employees", new { id = employee.Id })" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
                 </td>
             </tr>

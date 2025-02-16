@@ -1,0 +1,148 @@
+﻿@model HRMS.Web.Models.ViewModels.ShiftViewModel
+
+@{
+    bool isEdit = Model.Id != Guid.Empty;
+}
+
+<h2>Create Shift</h2>
+
+<div id="modal" _="on closeModal remove me" class="overflow-scroll">
+    <div class="modal-underlay" _="on click trigger closeModal"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>@(isEdit ? "Edit" : "Create") Shift</h2>
+        </div>
+        <form hx-post="@Url.Action("Create")" hx-target="body" hx-swap="beforeend">
+            <div class="form-group">
+                <label for="Name" asp-for="Name">Shift Name</label>
+                <input type="text" class="form-control" id="Name" asp-for="Name" placeholder="Enter shift name" required>
+            </div>
+            <div class="form-group">
+                <label for="StartTime" asp-for="StartTime">Start Time</label>
+                <input type="time" class="form-control" id="StartTime" asp-for="StartTime" placeholder="Select shift start time" required>
+            </div>
+            <div class="form-group">
+                <label for="EndTime" asp-for="EndTime">End Time</label>
+                <input type="time" class="form-control" id="EndTime" asp-for="EndTime" placeholder="Select shift end time" required>
+            </div>
+            <div class="form-group">
+                <label asp-for="BreakStartTime">Break Start Time</label>
+                <input type="time" class="form-control" id="BreakStartTime" asp-for="BreakStartTime" placeholder="Select break start time">
+            </div>
+            <div class="form-group">
+                <label asp-for="BreakEndTime">Break End Time</label>
+                <input type="time" class="form-control" id="BreakEndTime" asp-for="BreakEndTime" placeholder="Select break end time">
+            </div>
+            <div class="form-group">
+                <label for="ShiftType">Shift Type</label>
+                <select class="form-control" id="ShiftType" name="ShiftType" required>
+                    <option value="Fixed">Fixed</option>
+                    <option value="Flexible">Flexible</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="workdays">Workdays</label>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="workdaysDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Workdays
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="workdaysDropdown">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="monday" value="Monday" />
+                            <label class="form-check-label" for="monday">Monday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="tuesday" value="Tuesday" />
+                            <label class="form-check-label" for="tuesday">Tuesday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="wednesday" value="Wednesday" />
+                            <label class="form-check-label" for="wednesday">Wednesday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="thursday" value="Thursday" />
+                            <label class="form-check-label" for="thursday">Thursday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="friday" value="Friday" />
+                            <label class="form-check-label" for="friday">Friday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="saturday" value="Saturday" />
+                            <label class="form-check-label" for="saturday">Saturday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sunday" value="Sunday" />
+                            <label class="form-check-label" for="sunday">Sunday</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="weeklyOffs">Weekly Offs</label>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="weeklyOffsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Weekly Offs
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="weeklyOffsDropdown">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="mondayOff" value="Monday" />
+                            <label class="form-check-label" for="mondayOff">Monday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="tuesdayOff" value="Tuesday" />
+                            <label class="form-check-label" for="tuesdayOff">Tuesday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="wednesdayOff" value="Wednesday" />
+                            <label class="form-check-label" for="wednesdayOff">Wednesday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="thursdayOff" value="Thursday" />
+                            <label class="form-check-label" for="thursdayOff">Thursday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="fridayOff" value="Friday" />
+                            <label class="form-check-label" for="fridayOff">Friday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="saturdayOff" value="Saturday" />
+                            <label class="form-check-label" for="saturdayOff">Saturday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="sundayOff" value="Sunday" />
+                            <label class="form-check-label" for="sundayOff">Sunday</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button class="btn btn-close" _="on click trigger closeModal">Close</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Collect selected workdays
+    document.querySelectorAll('#workdaysDropdown .form-check-input').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            const selectedWorkdays = Array.from(document.querySelectorAll('#workdaysDropdown .form-check-input:checked'))
+                .map(checkbox => checkbox.value)
+                .join(', ');
+
+            console.log('Selected Workdays: ', selectedWorkdays);
+        });
+    });
+
+    // Collect selected weekly offs
+    document.querySelectorAll('#weeklyOffsDropdown .form-check-input').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            const selectedWeeklyOffs = Array.from(document.querySelectorAll('#weeklyOffsDropdown .form-check-input:checked'))
+                .map(checkbox => checkbox.value)
+                .join(', ');
+
+            console.log('Selected Weekly Offs: ', selectedWeeklyOffs);
+        });
+    });
+</script>

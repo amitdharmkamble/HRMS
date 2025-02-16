@@ -1,6 +1,6 @@
 ﻿namespace HRMS.Core.Entities
 {
-    public class Department : BaseEntity
+    public class WorkLocation : BaseEntity
     {
         
     }

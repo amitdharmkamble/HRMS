@@ -6,9 +6,7 @@
     <title>@ViewData["Title"] - HRMS.Web</title>
     <script src="/js/htmx.min.js"></script>
     <script src="~/js/_hyperscript.min.js"></script>
-    <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="~/css/bootstrap.css" />
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/bootstrap.bundle.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
@@ -17,6 +15,8 @@
     <link href="~/css/bootstrap-grid.rtl.min.css" rel="stylesheet" />
     <link href="~/css/bootstrap-grid.rtl.css" rel="stylesheet" />
     <link href="~/css/bootstrap-grid.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <!-- Header Section -->
@@ -32,6 +32,8 @@
             <a href="@Url.Action("Index", "Home")">Home</a>
             <a href="@Url.Action("Index", "Departments")">Departments</a>
             <a href="@Url.Action("Index", "Designations")">Designations</a>
+            <a href="@Url.Action("Index", "WorkLocations")">Work Locations</a>
+            <a href="@Url.Action("Index", "Shifts")">Shifts</a>
             <a href="@Url.Action("Index", "Employees")">Employees</a>
             <a href="@Url.Action("Privacy", "Home")">Privacy</a>
         </div>

@@ -4,8 +4,8 @@ using HRMS.Infrastructure.Persistence;
 
 namespace HRMS.Infrastructure.Repositories
 {
-    public class DepartmentRepository : BaseRepository<Department>, IDepartmentRepository
+    public class ShiftRepository : BaseRepository<Shift>, IShiftRepository
     {
-        public DepartmentRepository(HRMSDbContext context) : base(context) { }
+        public ShiftRepository(HRMSDbContext context) : base(context) { }
     }
 }

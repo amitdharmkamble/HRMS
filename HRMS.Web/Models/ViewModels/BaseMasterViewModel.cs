@@ -1,6 +1,4 @@
-﻿using HRMS.Core.Entities;
-
-namespace HRMS.Web.Models.ViewModels
+﻿namespace HRMS.Web.Models.ViewModels
 {
     public class BaseMasterViewModel
     {

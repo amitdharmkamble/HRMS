@@ -9,11 +9,14 @@ namespace HRMS.Infrastructure.Persistence
 
         public DbSet<Department> Departments { get; set; }
         public DbSet<Designation> Designations { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
+        public DbSet<WorkLocation> WorkLocations { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeContact> EmployeeContacts { get; set; }
         public DbSet<EmployeeContactPerson> EmployeeContactPersons { get; set; }
         public DbSet<EmployeeDocument> EmployeeDocuments { get; set; }
         public DbSet<EmployeeSalary> EmployeeSalaries { get; set; }
+        public DbSet<EmployeeWorkDetails> EmployeeWorkDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -29,7 +29,7 @@ namespace HRMS.Web.Controllers
 
 
         // Create - Show form
-        public IActionResult Create()
+        public virtual IActionResult Create()
         {
             var model = new BaseMasterViewModel();
             ViewData["EntityName"] = typeof(T).Name;

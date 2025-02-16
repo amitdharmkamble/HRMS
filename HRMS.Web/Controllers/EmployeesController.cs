@@ -96,27 +96,5 @@ namespace HRMS.Web.Controllers
             }
             return View(model);
         }
-
-        [HttpPost]
-        public IActionResult TestToastMessage(ToastViewModel model)
-        {
-            try
-            {
-                int i = 0 / 10;
-                model.Title = "Success";
-                model.Message = "Toast message test successful";
-                model.Type = "success";
-                model.ResponseCode = 200;
-                return View("_ToastMessage", model);
-            }
-            catch (Exception ex)
-            {
-                model.Title = "Error";
-                model.Message = ex.Message;
-                model.Type = "error";
-                model.ResponseCode = 500;
-                return View("_ToastMessage", model);
-            }
-        }
     }
 }

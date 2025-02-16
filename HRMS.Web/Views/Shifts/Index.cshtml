@@ -1,0 +1,10 @@
+﻿@model IEnumerable<HRMS.Core.Entities.Shift>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Shifts Management</h2>
+
+<button class="btn btn-primary" hx-get="@Url.Action("Create")" hx-target="body" hx-swap="beforeend">Create</button>
+<partial name="_MasterList" model="Model" />
